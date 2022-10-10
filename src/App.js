@@ -25,7 +25,15 @@ class App extends Component {
             Hi! I'm {this.state.name.firstname}  {this.state.name.lastname} and I work at {this.state.company}
           </p>
           <button onClick={()=>{
-            this.setState({name:{firstname:'Takamura',lastname:'Balis'},company:'NHS'})
+            //this.setState({name:{firstname:'Takamura',lastname:'Balis'},company:'NHS'})
+            //or
+            this.setState((state,props)=>{
+              return {name:{firstname:'Takamura',lastname:'Balis'},company:'NHS'}
+            }, 
+            ()=>{
+              //tis function will execute after the first function has been executed
+              console.log(this.state)
+            })
           }}>
             Change Name
           </button>
