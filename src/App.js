@@ -8,40 +8,36 @@ class App extends Component {
   super();
 
   this.state = {
-    name:{
-      firstname:'Fenia',
-      lastname:'Batz'
-    },
-    company:'Progressnet'
-  }
- }
+    monsters:[   
+      {
+      name:'Linda'
+     },
+     {
+      name:'Frank'
+     },
+      {
+      name:'Jacky'
+     },
+     {
+      name:'Takamura'
+     }
+  ]
+
+ };
+}
 
   render(){
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Hi! I'm {this.state.name.firstname}  {this.state.name.lastname} and I work at {this.state.company}
-          </p>
-          <button onClick={()=>{
-            //this.setState({name:{firstname:'Takamura',lastname:'Balis'},company:'NHS'})
-            //or
-            this.setState((state,props)=>{
-              return {name:{firstname:'Takamura',lastname:'Balis'},company:'NHS'}
-            }, 
-            ()=>{
-              //tis function will execute after the first function has been executed
-              console.log(this.state)
-            })
-          }}>
-            Change Name
-          </button>
-        </header>
+        {
+          this.state.monsters.map((monster)=>{
+           return <h1>{monster.name}</h1>
+          })
+        }
       </div>
     );
   }
-  }
+}
   
 
 export default App;
