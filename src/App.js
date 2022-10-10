@@ -3,31 +3,26 @@ import { Component } from 'react';
 import './App.css';
 
 class App extends Component {
- constructor(){
-  super();
+  constructor(){
+    super();
 
-  this.state = {
-    monsters:[   
-      {
-      name:'Linda',
-      id:'123ef12'
-     },
-     {
-      name:'Frank',
-      id:'123ef14'
-     },
-      {
-      name:'Jacky',
-      id:'123ef15'
-     },
-     {
-      name:'Takamura',
-      id:'123ef16'
-     }
-  ]
+    this.state = {
+      monsters:[]
+    };
+  }
 
- };
-}
+  //Mount = First Time the Component renders
+  componentDidMount(){
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response)=> response.json())
+      .then((users) => this.setState(()=>{
+        return {monsters: users}
+      },
+      ()=>{
+        console.log(this.state)
+      }
+      ))
+  }
 
   render(){
     return (
