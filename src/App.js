@@ -5,11 +5,30 @@ import './App.css';
 
 
 //FUNCTIONAL COMPONENTS
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const App = () =>{
+  console.log('render')
   const [searchField, setSearchField] = useState('');   //[value,setValue]
-  console.log(searchField)
+  const [monsters,setMonsters] = useState([]);
+  const [filteredMonsters,setFilteredMonsters] = useState(monsters)
+
+  useEffect(()=>{
+    console.log('effect fired')
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then((response)=> response.json())
+    .then((users) => setMonsters(users)
+    );
+  }, []) //when array is empty [] the callback will not render again only the very first time when mounts
+
+  useEffect(()=>{
+   const  newFilteredMonsters = monsters.filter(monster=>{ 
+      return  monster.name.toLowerCase().includes(searchField)
+    });
+
+    setFilteredMonsters(newFilteredMonsters)
+  },[monsters,searchField])
+
 
   const onSearchChange = (event) =>{
     const searchFieldString = event.target.value.toLocaleLowerCase();
@@ -24,7 +43,7 @@ const App = () =>{
       onChangHandler ={onSearchChange} 
       placeholder='Search Monsters'/>
   
-    {/* //<CardList monsters={filteredMonsters} /> */}
+    <CardList monsters={filteredMonsters} />
   </div>
   )
 
