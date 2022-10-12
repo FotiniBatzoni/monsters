@@ -8,13 +8,13 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 const App = () =>{
-  console.log('render')
+  // console.log('render')
   const [searchField, setSearchField] = useState('');   //[value,setValue]
   const [monsters,setMonsters] = useState([]);
   const [filteredMonsters,setFilteredMonsters] = useState(monsters)
 
   useEffect(()=>{
-    console.log('effect fired')
+    // console.log('effect fired')
     fetch('https://jsonplaceholder.typicode.com/users')
     .then((response)=> response.json())
     .then((users) => setMonsters(users)
